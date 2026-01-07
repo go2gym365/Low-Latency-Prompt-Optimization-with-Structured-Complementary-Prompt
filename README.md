@@ -8,13 +8,20 @@ This repository contains the official implementation of the paper "Don’t Gener
 
 ## 📋 Overview
 
-This project implements LLPO (Low Latency Prompt Optimization), a novel approach presented at EACL 2026 that uses classification-based methods instead of generation-based approaches to optimize prompts for language models. By using a classifier to identify the appropriate domain/category and then selecting pre-optimized prompts, LLPO achieves significantly lower latency compared to generation-based prompt optimization methods.
+This project implements LLPO (Low Latency Prompt Optimization), a novel approach that uses classification-based methods instead of generation-based approaches to optimize prompts for language models. By using a lightweight classifier to predict the appropriate task/domain category and selecting a pre-optimized structured prompt, LLPO significantly reduces inference latency while maintaining high response quality.
 
 The main components include:
 
-- **Field Clustering**: Semantically clustering diverse domain labels into similar groups to reduce classification complexity
-- **Multi-task Classifier**: Training efficient classification models using clustered labels for fast inference
-- **Prompt Optimization**: Comparing LLPO with other optimization methods including batch-based and field-wise approaches
+- **Field Clustering**: Semantically similar domain and prompt attributes are grouped to construct a compact label space for classification.
+- **Prompt Optimization**: A pretrained encoder model rapidly predicts structured prompt fields from the user instruction and populates them into a predefined system-prompt template, enabling fast and consistent optimization without autoregressive generation.
+
+Compared with existing generation-based optimization methods, LLPO delivers:
+
+✅ Comparable or improved response quality
+✅ Up to ~2000× lower optimization latency
+✅ Stable and reproducible system-prompt structure
+
+LLPO is ideal for real-time or latency-sensitive LLM applications, where prompt optimization overhead must remain minimal.
 
 ## 🏗️ Project Structure
 
@@ -50,9 +57,15 @@ LLPO_github/
 │   └── sh/                              # Execution scripts
 │       ├── optimization/
 │       └── inference/
-└── prompts/                           
-
-
+├── prompts/
+│
+└── datasets/                            # Datasets
+    ├── clusters/                        # Clustering results
+    │   ├── final_kmeans/
+    │   └── final_agglomerative/
+    └── SCP/                             # SCP dataset
+        ├── SCP.json
+        └── minilm_field_embeddings.pkl               
 ```
 
 ## 🛠️ Environment Setup
@@ -91,10 +104,12 @@ Train multi-task classifiers using the clustered labels.
 #### RoBERTa Model (K-means Clusters)
 ```bash
 bash classifier/sh/RoBERTa_kmeans.sh
+bash classifier/sh/RoBERTa_agg.sh
 ```
 
 #### DeBERTa Model (Agglomerative Clusters)
 ```bash
+bash classifier/sh/DeBERTa_kmeans.sh
 bash classifier/sh/DeBERTa_agg.sh
 ```
 
@@ -153,14 +168,14 @@ Each folder contains:
 
 ## 📈 Evaluation
 
-### Win/Tie/Lose Analysis
-```bash
-python evaluation/scoring/win_tie_lose.py
-```
-
 ### GPT-based Scoring
 ```bash
 python evaluation/scoring/scoring_gpt.py
+```
+
+### Win/Tie/Lose Analysis
+```bash
+python evaluation/scoring/win_tie_lose.py
 ```
 
 ## 🛠️ Supported Models
