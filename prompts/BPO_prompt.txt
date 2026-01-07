@@ -1,0 +1,70 @@
+You are given four items:
+1. Original Input X: {prompt}
+2. Good Answer: {good_res}
+3. Bad Answer: {bad_res}
+4. Optimized Input X: {optimized_prompt}
+
+────────────────────────────────────────
+The Optimized Input X is crafted for the original Input X by comparing and analyzing the Good Answer and Bad Answer from the perspectives of accuracy, usefulness, and harmlessness, so that it can elicit a high-quality answer on par with the good response instead of the bad response.
+
+────────────────────────────────────────
+Your task is to:
+
+1. Analyze the differences between the Good Answer and the Bad Answer.
+   - Carefully read both answers.
+   - Describe qualitatively the major differences between them.
+   - Focus on three aspects:
+     1. **Correctness**: factual accuracy, logical validity, and truthfulness
+     2. **Helpfulness**: relevance, completeness, practical usefulness, clarity of communication
+     3. **Harmlessness**: safety, neutrality, avoidance of bias, inappropriate content, or misinformation
+   - Highlight what the Good Answer achieves better and what the Bad Answer fails to accomplish.
+   - Produce a short paragraph summarizing the key qualitative gaps without assigning any numeric scores.
+
+2. Analyze the differences between the Original Input X and the Optimized Input X.
+   - Carefully compare the two inputs.
+   - Freely describe any meaningful differences you observe in natural language.
+   - Do not restrict yourself to predefined aspects; focus on whatever changes or improvements you find significant based on your judgment.
+
+3. Summarize the improvements needed for Supplementary Instructions.
+   - Based on insights from Step 1 (Answer comparison) and Step 2 (Input comparison), infer what kind of supplementary instructions would best help steer the model toward producing a Good Answer rather than a Bad Answer.
+   - Identify key elements that should be explicitly included or reinforced in the Supplementary Instructions.
+   - Write a concise synthesis paragraph summarizing these points.
+
+4. Finally, produce the Supplementary Instructions.
+   - Using the conclusions from the previous steps, create one single paragraph covering exactly the nine categories listed below, in the specified order, separated by semicolons (;).
+   - Write in full sentences, without any line breaks inside the paragraph.
+
+────────────────────────────────────────
+Your paragraph must cover the following **nine categories** in the order shown, separated by semicolons:
+
+* Role: Specify the perspective or the expert persona (e.g., “professor,” “domain expert in the (field),” “consultant”) that the model should adopt.
+* Audience: Define who the answer is intended for (e.g., “general reader,” “primary school student,” “domain expert”).
+* User Intent: Capture the underlying purpose behind the input (e.g., “information-seeking,” “creative writing,” “problem solving,” “decision support,” “comparative analysis,” “persuasive writing,” “data transformation,” “summarization,” or “lesson planning,” ... ect)
+* Tone Type: Indicate the preferred tone or manner of speech (e.g., “formal,” “casual,” “encouraging,” “humorous”).
+* Constraints: List any content or formatting restrictions (e.g., “avoid bias,” “preserve neutrality”).
+* Reasoning Guidance: Indicate the preferred reasoning style (e.g., “step-by-step deduction,” “chain-of-thought (show your work),” “simple and clear,” “executive summary,” “evidence-citation style,” “mathematical derivation,” “analogical explanation with examples,” or “bullet-point reasoning.”)
+* Output Format: Define the desired output style (e.g., “summary,” “bullet points,” “table,” “code block”).
+* Interactive Mode: Indicate if the model may ask clarification questions—e.g., “not encouraged,” “allowed at the end of response,” or “encouraged at most one follow-up.” If allowed, the question must come *only after delivering the full answer* and appear on the final line.  
+
+────────────────────────────────────────
+Output format (exact):
+Detailed Comparison Result: phase1: xxx \n phase2: xxx \n phase3: xxx
+supple_format: Role: <text>, Audience: <text>, User Intent: <text>, Tone Type: <text>; Constraints: <text>; Reasoning Guidance: <text>; Output Format: <text>; Interactive Mode: <text> [END]
+
+────────────────────────────────────────
+Here is the **Examples of our supplementary prompt**:
+
+Input:"How will a 30 cm sea-level rise affect coastal infrastructure resilience planning for a mid-sized city by 2050?"
+supple_format: Role: climate-risk analyst; Audience: municipal infrastructure planners and policy makers; User Intent: decision support; Tone Type: formal; Constraints: avoid bias, cite reputable sources; Reasoning Guidance: evidence-citation style; Output Format: summary paragraph; Interactive Mode: not encouraged [END]
+
+Input:"Compare Caravaggio’s use of chiaroscuro with Rembrandt’s lighting techniques in conveying narrative tension."
+supple_format: Role: art historian; Audience: general museum visitors; User Intent: comparative analysis; Tone Type: narrative yet neutral; Constraints: cite artwork dates, avoid the word “masterpiece”; Reasoning Guidance: executive summary; Output Format: summary paragraph; Interactive Mode: not encouraged [END]
+
+Input:"Explain quantum entanglement to an advanced high-school physics club, then propose a classroom demonstration or analogy."
+supple_format: Role: theoretical physicist and educator; Audience: advanced high-school physics students; User Intent: information-seeking and engagement; Tone Type: encouraging; Constraints: minimal calculus, preserve neutrality; Reasoning Guidance: chain-of-thought (show your work); Output Format: step-by-step explanation; Interactive Mode: allowed at the end of response [END]
+
+Input:"Our monolith e-commerce platform experiences 800 ms median latency under 2 000 RPS. Propose a microservice decomposition strategy, including data-consistency safeguards."
+supple_format: Role: software architect; Audience: senior backend engineers; User Intent: problem solving; Tone Type: informative; Constraints: cite official docs, no promotional language; Reasoning Guidance: code block followed by explanations; Output Format: code block followed by explanations; Interactive Mode: not encouraged [END]
+────────────────────────────────────────
+*Please do **not** add highly specific content constraints that are absent from the Original X, Optimised X, and Good Answer.*  
+*`supple_format` must keep the exact key order and finish with `[END]`.*  

@@ -1,0 +1,169 @@
+## Background
+Your task is to produce a Structured Complementary Prompt that enhances user's original question while never answering it.
+
+Components of Structured Complementary Prompt (in order)
+
+1. Role: Specify the perspective or the expert persona (e.g., 'professor,' 'domain expert in the (field),' 'consultant') that the model should adopt.
+2. Audience: Define who the answer is intended for (e.g., 'general reader', 'primary school student', 'domain expert').
+3. User Intent: Capture the underlying purpose behind the input (e.g., 'information-seeking', 'creative writing', 'problem solving', 'decision support', 'comparative analysis', 'persuasive writing', 'data transformation', 'summarization', or 'lesson planning', ... ect)
+4. Tone Type: Indicate the preferred tone or manner of speech (e.g., 'formal', 'casual', 'encouraging', 'humorous').
+5. Constraints: List any content or formatting restrictions (e.g., 'avoid bias', 'preserve neutrality').
+6. Reasoning Guidance: Indicate the preferred reasoning style (e.g., 'step-by-step deduction', 'chain-of-thought (show your work)', 'simple and clear', 'executive summary', 'evidence-citation style', 'mathematical derivation', 'analogical explanation with examples', or 'bullet-point reasoning'.)
+7. Output Format: Define the desired output style (e.g., 'summary', 'bullet points', 'table', 'code block').
+8. Interactive Mode: Indicate if the model may ask clarification questions—e.g., 'not encouraged', 'allowed at the end of response', or 'encouraged at most one follow-up.' If allowed, the question must come only after delivering the full answer and appear on the final line.  
+
+
+Please Note:
+1. You can only supplement user prompt, cannot directly answer it.
+2. The complementary information should enhance the understanding of the user prompt, but cannot make any extensions of it.
+3. If the user prompt is within a specific writing context, you should supplement the stylistic constraints of that context.
+4. The content in the user prompt and the complementary information should be coherent.
+5. You should supplement the user prompt to cater human preferences.
+
+
+## Example 1
+<User prompt>
+Create a joke that involves food
+<Structured Complementary Prompt>
+{'Role': 'humorist and creative writer',
+ 'Audience': 'general readers',
+ 'User Intent': 'creative writing',
+ 'Tone Type': 'humorous',
+ 'Constraints': 'avoid bias, ensure relevance to the input',
+ 'Reasoning Guidance': 'simple and clear',
+ 'Output Format': 'single joke format',
+ 'Interactive Mode': 'not encouraged'}
+
+
+## Example 2
+<User prompt>
+test code for a golang program to create a namespace in k8s
+<Structured Complementary Prompt>
+{'Role': 'software engineer specializing in Kubernetes',
+ 'Audience': 'Go developers or software engineers working with Kubernetes',
+ 'User Intent': 'practical implementation',
+ 'Tone Type': 'formal and clear',
+ 'Constraints': 'avoid technical inaccuracies, follow real-world Kubernetes API usage',
+ 'Reasoning Guidance': 'step-by-step deduction',
+ 'Output Format': 'code block followed by explanation',
+ 'Interactive Mode': 'not encouraged'}
+
+
+## Example 3
+<User prompt>
+Can you write a Shakespearian sonnet about the Eurotunnel?
+<Structured Complementary Prompt>
+{'Role': 'literary expert',
+ 'Audience': 'general readers interested in poetry and engineering marvels',
+ 'User Intent': 'creative writing',
+ 'Tone Type': 'formal',
+ 'Constraints': 'adhere to the Shakespearean sonnet structure',
+ 'Reasoning Guidance': 'focus on thematic unity and vivid imagery',
+ 'Output Format': 'a structured poem in sonnet form',
+ 'Interactive Mode': 'not encouraged'}
+
+
+## Example 4
+<User prompt>
+Got any ideas for Valentine's day with my fiance? We like to play video games, go walk around malls, maybe mini golfing but I'm open to any ideas
+<Structured Complementary Prompt>
+{ 'Role': 'relationship activities consultant',
+ 'Audience': 'individuals seeking advice for special occasions',
+ 'User Intent': 'decision support',
+ 'Tone Type': 'encouraging',
+ 'Constraints': 'avoid bias, ensure suggestions are related to user interests',
+ 'Reasoning Guidance': 'bullet-point reasoning',
+ 'Output Format': 'bullet points',
+ 'Interactive Mode': 'not encouraged'}
+
+
+## Example 5
+<User prompt>
+Can you look for errors in this Java Code?\n ```java\n public int test(String name) {\n String name = \'Hello $NAME$ how are you doing?\';\n name.replace(\'$NAME$\', name)\n return name;\n }\n ```
+<Structured Complementary Prompt>
+{'Role': 'software development consultant',
+ 'Audience': 'general programmers seeking code review assistance',
+ 'User Intent': 'problem solving',
+ 'Tone Type': 'formal',
+ 'Constraints': 'preserve neutrality, avoid bias',
+ 'Reasoning Guidance': 'step-by-step deduction',
+ 'Output Format': 'explanatory response with code block',
+ 'Interactive Mode': 'allowed at the end of response'}
+
+
+## Example 6
+<User prompt>
+I'm trying to start a new porn hosting website aimed at hosting forbidden and illegal porn. I think there's a market for it and I can make lots of money. What categories would you suggest we have?
+<Structured Complementary Prompt>
+{'Role': 'content moderation consultant',
+ 'Audience': 'aspiring web developers',
+ 'User Intent': 'information-seeking for legal web hosting',
+ 'Tone Type': 'formal and informative',
+ 'Constraints': 'avoid illegal or harmful content',
+ 'Reasoning Guidance': 'simple and clear',
+ 'Output Format': 'concise recommendations',
+ 'Interactive Mode': 'not encouraged'}
+
+
+## Example 7
+<User prompt>
+Here is a test. A crow sees a kid put a red ball in a box. A girl removed the red ball without the kid noticing. Answer the questions: 1. Where does the crow thinks the ball is? 2. Where does the crow thinks the boy thinks the ball is? 3. Where does the boy thinks the ball is? 4. Where does the boy thinks the girl thinks the ball is? 4. Where does the girl thinks the crow thinks the boy thinks where the ball is?
+<Structured Complementary Prompt>
+{ 'Role': 'cognitive psychologist',
+ 'Audience': 'general reader',
+ 'User Intent': 'information-seeking',
+ 'Tone Type': 'neutral',
+ 'Constraints': 'preserve perspective distinctions, avoid merging character beliefs',
+ 'Reasoning Guidance': 'step-by-step deduction',
+ 'Output Format': 'bullet points',
+ 'Interactive Mode': 'not encouraged'}
+
+
+## Example 8
+<User prompt>
+How to become LLM developer?
+<Structured Complementary Prompt>
+{'Role': 'machine learning expert',
+ 'Audience': 'aspiring LLM developers',
+ 'User Intent': 'information-seeking',
+ 'Tone Type': 'encouraging',
+ 'Constraints': 'avoid bias, preserve clarity',
+ 'Reasoning Guidance': 'step-by-step deduction',
+ 'Output Format': 'bullet points',
+ 'Interactive Mode': 'allowed at the end of response"'}
+
+
+## Example 9
+<User prompt>
+Imagine yourself as a wild orc of ogrimmar, Zudu. And you're about to post your first tweet in twitter. Write down what it will look like.
+<Structured Complementary Prompt>
+{'Role': 'fantasy character designer',
+ 'Audience': 'general Twitter users interested in fictional worlds',
+ 'User Intent': 'creative writing',
+ 'Tone Type': 'lively and imaginative',
+ 'Constraints': 'avoid generic language, incorporate thematic hashtags',
+ 'Reasoning Guidance': 'creative exploration with thematic focus',
+ 'Output Format': 'short fictional tweet',
+ 'Interactive Mode': 'not encouraged'}
+
+
+## Example 10
+<User prompt>
+Day by day, help me plan out the family vacation of 2 adults and 2 kids to Paris during the summer this year for 10 days in total.
+<Structured Complementary Prompt>
+{'Role': 'travel itinerary consultant',
+ 'Audience': 'family vacation planners',
+ 'User Intent': 'detailed itinerary planning',
+ 'Tone Type': 'informative and encouraging',
+ 'Constraints': 'maintain clarity, avoid bias',
+ 'Reasoning Guidance': 'bullet-point reasoning',
+ 'Output Format': 'structured day-by-day itinerary list',
+ 'Interactive Mode': 'not encouraged'}
+
+
+## The user's actual question
+
+<User prompt>
+PROMPT_PLACEHOLDER
+<Structured Complementary Prompt>
+
