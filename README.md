@@ -59,7 +59,7 @@ LLPO_github/
 │   └── sh/                              # Execution scripts
 │       ├── optimization/
 │       └── inference/
-├── prompts/
+├── prompts/                             # Prompt templates used for building the SCP dataset
 │
 └── datasets/                            # Datasets
     ├── clusters/                        # Clustering results
@@ -77,6 +77,28 @@ Install the required dependencies using pip:
 ```bash
 pip install -r requirements.txt
 ```
+
+## 📊 Datasets
+
+You can download it here:
+👉 [Dataset](YOUR_LINK_HERE)
+
+### SCP Dataset
+- `SCP.json`: Main dataset with instruction examples
+- `minilm_field_embeddings.pkl`: Field embeddings (using MiniLM model)
+- `prompts/`: Prompt templates for different optimization methods
+  - `BPO_prompt.txt`: Template for Batch Prompt Optimization
+  - `PAS_prompt.txt`: Template for Prompt Augmentation Strategy
+
+### Cluster Data
+- `final_kmeans/`: K-means clustering results
+- `final_agglomerative/`: Hierarchical clustering results
+
+Each folder contains:
+- `field_clusters_*.json`: Label groups by cluster
+- `lookup_table_*.json`: Label conversion table
+- `replaced_label_data_*.json`: Training data with clustered labels applied
+
 
 ## 🚀 Quick Start
 
@@ -129,7 +151,7 @@ bash classifier/sh/ModernBERT_agg.sh
 - `--dropout_rate`: Dropout rate
 - `--gamma`: Gamma parameter for Focal Loss
 
-### 3. Prompt Optimization and Evaluation
+### 3. Prompt Optimization and Inference
 
 #### LLPO (Low Latency Prompt Optimization)
 ```bash
@@ -143,36 +165,20 @@ bash evaluation/sh/optimization/optimized_PAS.sh    # Prompt Augmentation Strate
 bash evaluation/sh/optimization/optimized_FIPO.sh   # Field-wise Instruction Prompt Optimization
 ```
 
-#### Inference and Evaluation
+#### Inference
 ```bash
 bash evaluation/sh/inference/inference_LLPO.sh
 bash evaluation/sh/inference/inference_BPO.sh
+bash evaluation/sh/inference/inference_FIPO.sh
+bash evaluation/sh/inference/inference_PAS.sh
 ```
-
-## 📊 Datasets
-
-### SCP Dataset
-- `SCP.json`: Main dataset with instruction examples
-- `minilm_field_embeddings.pkl`: Field embeddings (using MiniLM model)
-- `prompts/`: Prompt templates for different optimization methods
-  - `BPO_prompt.txt`: Template for Batch Prompt Optimization
-  - `PAS_prompt.txt`: Template for Prompt Augmentation Strategy
-
-### Cluster Data
-- `final_kmeans/`: K-means clustering results
-- `final_agglomerative/`: Hierarchical clustering results
-
-Each folder contains:
-- `field_clusters_*.json`: Label groups by cluster
-- `lookup_table_*.json`: Label conversion table
-- `replaced_label_data_*.json`: Training data with clustered labels applied
 
 
 ## 📈 Evaluation
 
 ### GPT-based Scoring
 ```bash
-python evaluation/scoring/scoring_gpt.py
+python evaluation/scoring/scoring_gpt.py -a our_data.jsonl -b nonoutdata.jsonl -o output.jsonl
 ```
 
 ### Win/Tie/Lose Analysis
