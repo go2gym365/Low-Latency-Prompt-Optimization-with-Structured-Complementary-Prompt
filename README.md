@@ -191,7 +191,7 @@ If you use this code, please cite:
 @inproceedings{dont-generate-classify-2026,
   title={Don't Generate, Classify: Low Latency Prompt Optimization},
   author={[Authors]},
-  booktitle={Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics (EACL)},
+  booktitle={Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics (EACL)},
   year={2026}
 }
 ```
